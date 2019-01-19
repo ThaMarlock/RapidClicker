@@ -134,28 +134,28 @@ Return
 ;--------------------------------------
 
 ;-------------HOTKEYS FUNCTION---------
-~LButton::
+LButton::
     If (bVar_Burst) {
         If (bVar_Random) {
             Loop {
-                Loop iVar_BurstTicks {
-                    Click
-                    SetMouseDelay, %iVar_BurstDuration%
-                }
                 Random, iTemp_Delay, iVar_MinRandomTime, iVar_MaxRandomTime
                 SetMouseDelay, %iTemp_Delay%
-                If (GetKeyState(LButton, "P")=0) {
+                Loop %iVar_BurstTicks% {
+                    Click
+                    Sleep, %iVar_BurstDuration%
+                }
+                If (GetKeyState("LButton", "P")=0) {
                     Break
                 }
             }
         } Else {
             Loop {
-                Loop, iVar_BurstTicks {
-                    Click
-                    SetMouseDelay, %iVar_BurstDuration%
-                }
                 SetMouseDelay, %iVar_Delay%
-                If (GetKeyState(LButton, "P")=0) {
+                Loop, %iVar_BurstTicks% {
+                    Click
+                    Sleep, %iVar_BurstDuration%
+                }
+                If (GetKeyState("LButton", "P")=0) {
                     Break
                 }
             }
@@ -164,17 +164,17 @@ Return
         If (bVar_Random) {
             Loop {
                 Random, iTemp_Delay, iVar_MinRandomTime, iVar_MaxRandomTime
+                SetMouseDelay, %iVar_Delay%
                 Click
-                SetMouseDelay, %iTemp_Delay%
-                If (GetKeyState(LButton, "P")=0) {
+                If (GetKeyState("LButton", "P")=0) {
                     Break
                 }
             }
         } Else {
             Loop {
-                Click
                 SetMouseDelay, %iVar_Delay%
-                If (GetKeyState(LButton, "P")=0) {
+                Click
+                If (GetKeyState("LButton", "P")=0) {
                     Break
                 }
             }
